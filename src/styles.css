@@ -1,0 +1,217 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Design system definition.
+ *
+ * The @theme inline block maps CSS custom properties to Tailwind utility
+ * classes (e.g. --color-primary -> bg-primary, text-primary).
+ *
+ * The :root and .dark blocks define the actual color values using oklch.
+ * All colors MUST use oklch format.
+ *
+ * To add a new semantic color:
+ * 1. Add the variable to :root (light value) and .dark (dark value)
+ * 2. Register it in @theme inline as --color-<name>: var(--<name>)
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+  --color-fire: var(--fire);
+  --color-road: var(--road);
+  --color-gold: var(--gold);
+  --color-terrain: var(--terrain);
+  --color-observation: var(--observation);
+  --color-lightning: var(--lightning);
+  --font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+:root {
+  --radius: 0.375rem;
+  /* Premium black and green: exact sRGB palette expressed as OKLCH. */
+  --background: oklch(0.13608742 0.00628605 145.219378);
+  --foreground: oklch(0.96545623 0.00897950 134.872972);
+  --card: oklch(0.18844171 0.01262975 145.052834);
+  --card-foreground: var(--foreground);
+  --popover: var(--card);
+  --popover-foreground: var(--foreground);
+  --primary: oklch(0.89637621 0.17676989 129.038073);
+  --primary-foreground: var(--background);
+  --observation: oklch(0.77195812 0.07297023 295.429069);
+  --lightning: oklch(0.75 0.14 245);
+  --secondary: color-mix(in oklab, var(--primary) 16%, var(--card));
+  --secondary-foreground: var(--primary);
+  --muted: var(--card);
+  --muted-foreground: oklch(0.73512806 0.02216142 140.881189);
+  --accent: color-mix(in oklab, var(--primary) 8%, var(--card));
+  --accent-foreground: var(--primary);
+  --destructive: oklch(0.64700009 0.17217971 25.957976);
+  --destructive-foreground: var(--background);
+  --warning: oklch(0.79243435 0.13156071 83.141615);
+  --danger: var(--destructive);
+  --fire: oklch(0.72493417 0.18137083 45.493589);
+  --gold: var(--primary);
+  --terrain: oklch(0.57476294 0.07788843 133.655630);
+  --road: oklch(0.59208102 0.02084404 137.824068);
+  --border: oklch(0.29512047 0.02475024 144.915506);
+  --input: var(--border);
+  --ring: var(--gold);
+  --chart-1: var(--primary);
+  --chart-2: var(--warning);
+  --chart-3: var(--fire);
+  --chart-4: var(--gold);
+  --chart-5: var(--muted-foreground);
+  --sidebar: var(--card);
+  --sidebar-foreground: var(--foreground);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--primary-foreground);
+  --sidebar-accent: var(--accent);
+  --sidebar-accent-foreground: var(--accent-foreground);
+  --sidebar-border: var(--border);
+  --sidebar-ring: var(--ring);
+  --glow: none;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    color-scheme: dark;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0ms !important; animation-duration: 0ms !important; }
+}
+
+/* One unframed map workspace; depth is decorative, not measured terrain. */
+.pw-layout { grid-template-columns: minmax(0, 1fr) 340px; grid-template-rows: auto auto auto auto minmax(180px, 1fr) auto; }
+.pw-header, .pw-selector, .pw-stages, .pw-dispatch, .pw-playback { grid-column: 1 / -1; }
+.pw-map { grid-column: 1; grid-row: 5; }
+.pw-panel { grid-column: 2; grid-row: 5; }
+* { letter-spacing: 0; }
+.pw-map svg { background: var(--background); }
+.pw-event { max-width: 560px; }
+.pw-sheet-toggle { display: none; }
+.pw-depth { fill: var(--card); stroke: var(--border); }
+.pw-map-glow { filter: drop-shadow(0 0 4px color-mix(in oklab, var(--primary) 35%, transparent)); }
+.pw-observation-glow { filter: drop-shadow(0 0 3px color-mix(in oklab, var(--observation) 25%, transparent)); }
+.pw-boundary-shadow { filter: drop-shadow(0 12px 14px var(--map-shadow)); }
+:root { --map-shadow: oklch(0.05 0.003 145 / .8); }
+::selection { background: var(--primary); color: var(--background); }
+:where(a, summary, input):focus-visible { outline: 2px solid var(--ring); outline-offset: 3px; }
+@media (min-width: 1800px) { .pw-layout { grid-template-columns: minmax(0, 1fr) 360px; } }
+@media (max-width: 1000px) and (min-width: 701px) { .pw-layout { grid-template-columns: minmax(0, 1fr) 300px; } .pw-header { padding-inline: 14px; } }
+@media (max-width: 700px) {
+  .pw-layout { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto auto auto minmax(180px, 1fr) auto; }
+  .pw-header { min-height: 76px; padding: 12px; }
+  .pw-logo { width: 190px; }
+  .pw-header-status { gap: 8px; }
+  .pw-selector { padding: 4px 10px; gap: 4px; }
+  .pw-selector button { min-width: 0; }
+  .pw-selector button { flex: 1; font-size: 11px; padding-inline: 8px; }
+  .pw-map { grid-column: 1; grid-row: 5; }
+  .pw-panel { position: fixed; inset: auto 0 204px; z-index: 25; height: 46px; border-top: 1px solid var(--border); background: var(--card); border-radius: 8px 8px 0 0; overflow: hidden; }
+  .pw-panel[data-open="true"] { height: min(55dvh, calc(100dvh - 350px), 560px); }
+  .pw-sheet-toggle { display: flex; width: 100%; height: 46px; justify-content: space-between; padding-inline: 18px; border-radius: 0; }
+  .pw-panel-content { height: calc(100% - 46px); }
+  .pw-playback { grid-column: 1; grid-row: 6; z-index: 30; }
+  .pw-event { bottom: 80px; left: 16px; right: 16px; padding: 12px 0; }
+  .pw-event h2 { font-size: 20px; }
+  .pw-event p { font-size: 12px; }
+  .pw-map-caption { display: none; }
+  .pw-attribution { bottom: 51px; font-size: 8px; }
+}
+
+/* Static decoration, separate from real geography; masks keep text clear. */
+.pw-logo { width: 260px; }
+.pw-header { min-height: 109px; }
+.pw-contours { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; color: var(--terrain); opacity: .06; }
+.pw-contours-header { mask-image: radial-gradient(ellipse at 18% 45%, transparent 8%, black 65%, transparent 100%); }
+.pw-contours-sidebar { top: auto; height: 240px; mask-image: linear-gradient(transparent, black 50%, transparent); }
+.pw-contours-results { mask-image: radial-gradient(ellipse at center, transparent 35%, black 75%, transparent 100%); }
+.pw-panel-scroll > div { background: var(--card); }
+.pw-satellite-unread { animation: pw-observation-outline 1.4s ease-in-out 2; }
+.pw-observation-message { animation: pw-observation-message 8s forwards; }
+@keyframes pw-observation-message { 0%, 85% { opacity: 1; visibility: visible; } 100% { opacity: 0; visibility: hidden; } }
+@keyframes pw-observation-outline { 50% { border-color: var(--warning); box-shadow: 0 0 0 3px color-mix(in oklab, var(--warning) 18%, transparent); } }
+@media (max-width: 700px) {
+  .pw-logo { width: 190px; }
+  .pw-header { min-height: 76px; }
+}
+
+/* Playback sizes itself in normal flow; cards and their complete timestamps never shrink. */
+.pw-timeline { flex-shrink: 0; width: 100%; }
+.pw-event-strip { scrollbar-width: auto; scrollbar-color: var(--terrain) var(--background); }
+.pw-event-strip::-webkit-scrollbar { height: 10px; }
+.pw-event-strip::-webkit-scrollbar-track { background: var(--background); }
+.pw-event-strip::-webkit-scrollbar-thumb { background: var(--terrain); border: 2px solid var(--background); border-radius: 4px; }
+.pw-layout { overflow-y: auto; }
+.pw-inspection > :last-child { height: auto; flex-shrink: 0; }
+.pw-panel-scroll { scrollbar-gutter: stable; }
+.pw-panel-scroll time, [role="dialog"] time, [role="alertdialog"] time { white-space: nowrap; }
+.pw-panel-scroll .font-mono { overflow-wrap: anywhere; }
+.pw-panel-scroll button { white-space: normal; height: auto; min-height: 32px; }
+.pw-panel-scroll svg:not([viewBox]) { flex-shrink: 0; }
+.pw-event > div { display: grid; grid-template-columns: minmax(0,1fr) auto; }
+.pw-event h2 { min-width: 0; overflow-wrap: anywhere; }
+[role="dialog"], [role="alertdialog"] { overflow-wrap: anywhere; }
+[role="dialog"] button, [role="alertdialog"] button { white-space: normal; height: auto; min-height: 36px; flex-shrink: 0; }
+@media (max-width: 1000px) { .pw-event > div { grid-template-columns: minmax(0,1fr); gap: 6px; } .pw-event h2 { font-size: 18px; } .pw-panel-scroll { padding: 14px; } }
+@media (max-width: 700px) { .pw-playback-controls { grid-template-columns: minmax(0,1fr); gap: 4px; } .pw-playback-controls > :last-child { text-align: left; } .pw-header-status { flex-wrap: wrap; justify-content: flex-end; max-width: 155px; } }
+
+@media (max-height: 900px) { .pw-mission-summary { position: static; } }
+.pw-panel-scroll .flex.justify-between { flex-wrap: wrap; row-gap: 4px; }
+.pw-selector { display: grid; grid-template-columns: auto repeat(3,minmax(0,1fr)); }
+@media (max-width: 1023px) { .pw-selector { grid-template-columns: repeat(3,minmax(0,1fr)); } }
+
+.pw-drone-image { height: clamp(140px, calc(100dvh - 600px), 360px); aspect-ratio: auto; }

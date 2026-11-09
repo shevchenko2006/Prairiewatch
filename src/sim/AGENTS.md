@@ -1,0 +1,8 @@
+## Mission and coverage architecture
+- Scenario C uses typed verification state on the shared scenario clock. All readiness checks gate the pilot-approval pause; one approval starts the automated mission, and route distance/speed derives arrival and downstream capture, assessment, dispatcher and return events. C-only qualifying imagery enables Drone scoring without changing A/B or cross-class scoring.
+- Tower range envelopes and overlap estimates read the shared registry in local geographic kilometres. Rotating-camera reach is geometric only; online/offline reach is separate from scripted terrain visibility.
+- Automatic paired captures use bundled illustrative assets without a mounted viewer. Successive observations and scripted assessment/burn context gate evidence; the simulated lightning strike is context only (zero points), and fire-response authorization stays with the dispatcher. Monitoring-tab navigation preserves playback.
+- Dispatch resources use a shared fictional roster and pure allocation/lifecycle helpers; confirmation atomically revalidates crew and apparatus while explicit release conserves the roster, separate from aircraft approval.
+
+- Camera demo state is isolated in drone-demo.ts and advanced by the sole store loop without advancing scenario time; commands append camera-demo audit entries but never modify evidence, grounded-storyline drone or dispatcher permissions. Generated stills and illustrative thermal rendering are explicitly simulated.
+- Drone mission UI lives in the Drone tab (DroneMissionView); mission notifications are derived state with stable ids synced by syncMissionNotifications inside the sole clock and store, so dismissal/read state survives without component timers and resets with the scenario.

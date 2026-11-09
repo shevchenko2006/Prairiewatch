@@ -1,0 +1,25 @@
+# Greenwood County geographic base
+
+Downloaded 7 November 2026. Bundled for offline playback, no map API or keys.
+
+- County: U.S. Census Bureau, 2023 Cartographic Boundary Files, 1:500,000, GEOID 20073. https://www2.census.gov/geo/tiger/GENZ2023/shp/cb_2023_us_county_500k.zip
+- Roads: U.S. Census Bureau, 2023 TIGER/Line Greenwood County roads. https://www2.census.gov/geo/tiger/TIGER2023/ROADS/tl_2023_20073_roads.zip
+- Towns: U.S. Census Bureau, 2023 Kansas Cartographic Boundary places. https://www2.census.gov/geo/tiger/GENZ2023/shp/cb_2023_20_place_500k.zip
+
+Boundary filtered to Greenwood County; places use representative interior points, not addresses. Roads retain primary/secondary and local-road classifications, simplified by 12 metres for presentation. Coordinates transformed from NAD83 to EPSG:26914, with the county minimum easting/northing as a fixed local origin, rounded to 0.1 metre. This does not imply equivalent source accuracy.
+
+The response approach follows US Hwy 54 and Twp Rd 286. The junction is a short illustrative connection between the nearest highway point and mapped local road; it is not verified turn-by-turn routing. Staging is a proposed road point near Eureka, not a surveyed fire-station location. Scripted incident is near the end of that approach; arrival means illustrative vicinity, not a validated operational destination. No speed, access, closure, capacity or safety validation.
+
+No elevation/terrain data is shown. County geometry is generalized, roads and town geometry are 2023-vintage rather than live. All sensors, utility alignment, reporter position, GOES footprint, uncertainty and fire shapes are fictional/proposed layers distinct from this geographic base.
+
+## Proposed central drone dock and inspection demo
+
+The dock is the area-weighted polygon centroid of the bundled county boundary in its NAD83 UTM 14N geographic plane. Its local coordinates use the same origin as all other assets; proj4 converts the centroid back to longitude/latitude. It is not a viewport center or town center, and remains a proposed demo location pending physical site assessment. No aircraft range/coverage radius is asserted. Camera demo departures, straight-line distance, movement and return all use this one centroid. These are illustrative routes, not operational flight plans. Camera scenes are locally bundled AI-generated stills; thermal view is an illustrative rendering without measured temperatures. Operator demo actions and elapsed flight seconds are audited separately from the unchanged scenario clock, evidence and grounded-aircraft story.
+
+## Fictional fire-footprint model and measurements
+
+`geo.ts` anchors the existing 56-vertex polygon at local UTM kilometre point [34.35, 27.8], using the same EPSG:26914 origin as the county data. It is not a screen overlay. Raw scripted shape keys (scenario seconds, relative km parameter) are (0,.02), (180,.1), (360,.2), (540,.32), (660,.55), (900,.8), (1200,1.15), (1800,1.6), (2220,1.9). The size parameter is not a radius measurement. Each raw key shifts the center .55 times the parameter toward the fictional 40-degree wind direction; polar radius is size × (.45 + .9 × downwind-factor²), with deterministic irregularity and .85 east-west compression. All vertices and shifts are uniformly scaled about ignition by the square root of the chosen final area divided by the raw final polygon's shoelace area. `FIRE_PRESENTATION` sets the chosen final size to 250 acres at 2220 seconds (2:37 PM). Matching calibrated vertices interpolate with smoothstep between keys and hold the last shape afterward, including delayed dispatcher runs. Response milestones remain relative to actual authorization. This is a simulated, illustrative presentation model, not a validated spread forecast, containment perimeter or imagery-derived burn scar.
+
+The final-size comparison is “About ¾ of Wichita State’s 330-acre main campus.” (250/330 ≈ 0.76.) This is size context only, not evidence of acres saved, prevention or containment. Every readout, including hectares and maximum width, is calculated from the calibrated geographic polygon rather than a substituted display number.
+
+Only after the first fire observation is this modeled affected area shown. Area uses the shoelace formula on that exact pre-display UTM polygon (km² converted to m², hectares and acres; 1 acre = 4046.8564224 m²). Maximum width is the greatest vertex-to-vertex distance. These are approximate projected ground values, with UTM distortion and model uncertainty, not surveyed measurements. No radar, coverage, uncertainty or future spread geometry is counted. The horizontal scale bar inverts the decorative oblique transform before converting screen length to ground distance; acreage never uses the display transform. No measurement enters evidence scoring or authorization.
